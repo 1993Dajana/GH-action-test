@@ -1,13 +1,31 @@
-name: 'Display python version'
+name: 'Python script with pip caching'
 description: 'Simple app to display python version'
 author: 'Dajana'
+
+inputs:
+  requirements-file:
+    description: 'Path to requirements.txt'
+    required: false
+    default: 'requirements.txt'
+  script:
+    description: 'Path to Python script'
+    required: true
 
 runs:
   using: 'composite'
   steps:
-    - name: Python version
+    - name: Cache pip
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install python dependencies
+      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
       shell: bash
-      run: python --version
-    - name: Docker version
+
+    - name: Run python script
+      run: python script.py
       shell: bash
-      run: docker --version
