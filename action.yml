@@ -8,3 +8,6 @@ runs:
     - name: Python version
       shell: bash
       run: python --version
+    - name: Docker version
+      shell: bash
+      run: docker --version
