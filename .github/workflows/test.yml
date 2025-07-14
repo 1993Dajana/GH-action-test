@@ -1,0 +1,16 @@
+name: 'Test action'
+
+on:
+    push: 
+    workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+
+            - name: Run my composite action
+              uses: ./ # use action.yml from the root of this repo
