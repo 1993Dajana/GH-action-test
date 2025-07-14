@@ -1,0 +1,10 @@
+name: 'Display python version'
+description: 'Simple app to display python version'
+author: 'Dajana'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Python version
+      shell: bash
+      run: python --verison
