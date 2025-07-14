@@ -2,7 +2,7 @@ import requests
 import numpy as np
 
 def main():
-    print("Running my Python script with dependencies!")
+    print("Running my Python script with dependencies! Some modification.")
     response = requests.get("https://httpbin.org/get")
     print(f"Response from httpbin: {response.status_code}")
     arr = np.array([1, 2, 3])
