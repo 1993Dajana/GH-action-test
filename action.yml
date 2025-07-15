@@ -1,30 +1,30 @@
-name: 'Python script with pip caching'
-description: 'Simple app to display python version'
-author: 'Dajana'
+name: "LOCI Upload"
+description: "Upload binary to LOCI"
+author: "AuroraLabs"
 
 inputs:
   requirements-file:
-    description: 'Path to requirements.txt'
+    description: "Path to requirements.txt"
     required: false
-    default: 'requirements.txt'
-  script:
-    description: 'Path to Python script'
+    default: "requirements.txt"
+  elf:
+    description: "Path to binary elf"
     required: true
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: Cache pip
+    - name: Caching pip
       uses: actions/cache@v4
       with:
-        path: ~/.cache/pip
+        path: |
+          ~/.cache/pip
+          ~\AppData\Local\pip\Cache
         key: ${{runner.os}}-pip-${{hashFiles(inputs.requirements-file)}}
         restore-keys: ${{runner.os}}-pip-
-
-    - name: Install python dependencies
+    - name: Installing python dependencies
       run: pip install --cache-dir ~/.cache/pip -r ${{inputs.requirements-file}}
       shell: bash
-
-    - name: Run python script
-      run: python script.py -e ${{inputs.elf}}
+    - name: Uploading binary to LOCI
+      run: python -m loci_api list-projects
       shell: bash

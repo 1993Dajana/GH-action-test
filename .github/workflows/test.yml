@@ -19,6 +19,6 @@ jobs:
                 ls -lh ./build/test
 
             - name: Run my composite action
-              uses: ./ # use action.yml from the root of this repo
+              uses: ./
               with:
                 elf: ./build/test

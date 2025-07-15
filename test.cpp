@@ -1,6 +1,3 @@
-#include <iostream>
-
 int main() {
-    std::cout << "Hello from C++!" << std::endl;
-    return 0;
+    return 10 + 100 + 1000 + 10000;
 }
