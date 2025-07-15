@@ -1,0 +1,19 @@
+name: LOCI Function Insights
+description: Find function insights of project version
+author: AuroraLabs
+inputs:
+  project:
+    description: Name of the existing project for which to retrieve function insights
+    required: true
+  version:
+    description: Version of the project for which to retrieve function insights
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Find function insights
+      run: >-
+        loci_api func-insights
+        "${{ inputs.project }}"
+        "${{ inputs.version }}"
+      shell: bash

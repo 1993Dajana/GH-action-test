@@ -23,11 +23,12 @@ jobs:
           cd build/bin
           zip case_01_v1.zip case_01_v1
       - name: LOCI Upload
-        uses: ./upload-action
+        uses: ./
         env:
           LOCI_BACKEND_URL: '${{ secrets.LOCI_BACKEND_URL }}'
           LOCI_API_KEY: '${{ secrets.LOCI_API_KEY }}'
         with:
+          mode: upload
           binary: ./build/bin/case_01_v1.zip
           project: DIFF Tests
           version: case_03_v1

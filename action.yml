@@ -1,0 +1,47 @@
+name: LOCI
+description: Line of Code Insights Tool
+inputs:
+  mode:
+    description: Mode to run
+    required: true
+  requirements-file:
+    description: Path to requirements.txt
+    required: false
+    default: requirements.txt
+  binary:
+    description: Path to the ZIP archive containing all binaries to upload
+    required: false
+  project:
+    description: Name of the existing project for which to retrieve function insights
+    required: false
+  version:
+    description: Version of the project for which to retrieve function insights
+    required: false
+runs:
+  using: composite
+  steps:
+    - name: Cache pip
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/pip
+          ~\AppData\Local\pip\Cache
+        key: '${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}'
+        restore-keys: '${{ runner.os }}-pip-'
+    - name: Install python dependencies
+      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
+      shell: bash
+    - name: Activate upload mode
+      if: ${{ inputs.mode == 'upload' }}
+      uses: ./.github/actions/upload
+      with:
+        binary:  ${{ inputs.binary }}
+        project: ${{ inputs.project }}
+        version: ${{ inputs.version }}
+
+    - name: Activate insights mode
+      if: ${{ inputs.mode == 'insights' }}
+      uses: ./.github/actions/insights
+      with:
+        project: ${{ inputs.project }}
+        version: ${{ inputs.version }}
