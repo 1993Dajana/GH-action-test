@@ -1,22 +1,20 @@
 name: LOCI Upload
 description: Upload binary to LOCI
 author: AuroraLabs
-
 inputs:
   requirements-file:
     description: Path to requirements.txt
     required: false
     default: requirements.txt
   binary:
-    description: Path to elf file
+    description: Path to the ZIP archive containing all binaries to upload
     required: true
   project:
-    description: Project name
+    description: Name of an existing project to associate with this upload
     required: true
   version:
-    description: Version name
+    description: Version identifier for this upload
     required: true
-
 runs:
   using: composite
   steps:
@@ -26,11 +24,15 @@ runs:
         path: |
           ~/.cache/pip
           ~\AppData\Local\pip\Cache
-        key: ${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}
-        restore-keys: ${{ runner.os }}-pip-
+        key: '${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}'
+        restore-keys: '${{ runner.os }}-pip-'
     - name: Install python dependencies
-      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
+      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}'
       shell: bash
     - name: Upload binary to LOCI
-      run: python -m loci_api upload "${{ inputs.binary }}" "${{ inputs.project }}" "${{ inputs.version }}"
+      run: >-
+        loci_api upload
+        "${{ inputs.binary }}"
+        "${{ inputs.project }}"
+        "${{ inputs.version }}"
       shell: bash

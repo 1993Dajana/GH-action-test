@@ -1,28 +1,33 @@
-name: 'Test action'
-
-on:
-    push: 
-    workflow_dispatch:
-
+name: Example action
+'on':
+  push: null
+  workflow_dispatch: null
 jobs:
-    loci-upload:
-        runs-on: ubuntu-latest
+  loci-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install AArch64 toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+      - name: Build example case_01 app (v1)
+        run: >
+          mkdir -p build/bin
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            # - name: Build app
-            #   run: |
-            #     mkdir build
-            #     g++ -o build/case_03_v1 case_03.cpp
-
-            - name: LOCI Upload
-              uses: ./
-              env:
-                LOCI_BACKEND_URL: ${{ secrets.LOCI_BACKEND_URL }}
-                LOCI_API_KEY: ${{ secrets.LOCI_API_KEY }}                        
-              with:
-                binary: ./case_03_v1.zip
-                project: DIFF Tests
-                version: case_03_v1
+          aarch64-linux-gnu-g++ -o build/bin/case_01_v1
+          examples/case_01/test_01.cpp
+      - name: Zip binaries
+        run: |
+          cd build/bin
+          zip case_01_v1.zip build/bin/case_01_v1
+      - name: LOCI Upload
+        uses: ./upload-action
+        env:
+          LOCI_BACKEND_URL: '${{ secrets.LOCI_BACKEND_URL }}'
+          LOCI_API_KEY: '${{ secrets.LOCI_API_KEY }}'
+        with:
+          binary: ./build/bin/case_01_v1.zip
+          project: DIFF Tests
+          version: case_03_v1
