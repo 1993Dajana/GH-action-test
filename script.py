@@ -1,6 +1,7 @@
-import csv
+import os
 import requests
 import numpy as np
+
 from dateutil import parser
 from argparse import ArgumentParser
 
@@ -18,7 +19,7 @@ def main(args):
     date_str = "2025-07-14T10:00:00Z"
     parsed_date = parser.isoparse(date_str)
     print(f"Parsed date: {parsed_date}")
-    print(f"Elf: {args.elf}")
+    print(f"Elf: {args.elf}. Exists: {os.path.exists(args.elf)}")
 
 if __name__ == "__main__":
     main(parse_args())
