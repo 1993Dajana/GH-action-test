@@ -9,19 +9,20 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout repo
+            - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Compile c++ code
+            - name: Build app
               run: |
                 mkdir build
-                g++ -o build/test test.cpp
-                ls -lh ./build/test
+                g++ -o build/case_03_v1 case_03.cpp
 
-            - name: Run my composite action
+            - name: LOCI Upload
               uses: ./
               env:
                 LOCI_BACKEND_URL: ${{ secrets.LOCI_BACKEND_URL }}
                 LOCI_API_KEY: ${{ secrets.LOCI_API_KEY }}                        
               with:
-                elf: ./build/test
+                elf: ./build/case_03_v1
+                project: DIFF_Tests
+                version: case_03_v1
