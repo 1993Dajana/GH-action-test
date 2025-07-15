@@ -1,6 +1,6 @@
+import csv
 import requests
 import numpy as np
-import csv
 from dateutil import parser
 
 def main():
@@ -15,7 +15,6 @@ def main():
             if i == 0:
                 continue
             print(r)
-    # Example dateutil usage
     date_str = "2025-07-14T10:00:00Z"
     parsed_date = parser.isoparse(date_str)
     print(f"Parsed date: {parsed_date}")
