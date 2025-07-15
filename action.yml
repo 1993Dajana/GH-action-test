@@ -27,4 +27,7 @@ runs:
       shell: bash
     - name: Uploading binary to LOCI
       run: python -m loci_api list-projects
+      env:
+        LOCI_BACKEND_URL: ${{secrets.LOCI_BACKEND_URL}}
+        LOCI_API_KEY: ${{secrets.LOCI_API_KEY}}
       shell: bash
