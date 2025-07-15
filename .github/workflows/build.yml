@@ -12,10 +12,10 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Build app
-              run: |
-                mkdir build
-                g++ -o build/case_03_v1 case_03.cpp
+            # - name: Build app
+            #   run: |
+            #     mkdir build
+            #     g++ -o build/case_03_v1 case_03.cpp
 
             - name: LOCI Upload
               uses: ./
@@ -23,6 +23,6 @@ jobs:
                 LOCI_BACKEND_URL: ${{ secrets.LOCI_BACKEND_URL }}
                 LOCI_API_KEY: ${{ secrets.LOCI_API_KEY }}                        
               with:
-                elf: ./build/case_03_v1
+                elf: case_03_v1
                 project: DIFF Tests
                 version: case_03_v1
