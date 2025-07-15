@@ -12,5 +12,13 @@ jobs:
             - name: Checkout repo
               uses: actions/checkout@v4
 
+            - name: Compile c++ code
+              run: |
+                mkdir build
+                g++ -o build/test test.cpp
+                ls -lh ./build/test
+
             - name: Run my composite action
               uses: ./ # use action.yml from the root of this repo
+              with:
+                elf: ./build/test

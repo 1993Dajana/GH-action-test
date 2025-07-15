@@ -26,5 +26,5 @@ runs:
       shell: bash
 
     - name: Run python script
-      run: python script.py
+      run: python script.py -e ${{inputs.elf}}
       shell: bash
