@@ -21,7 +21,7 @@ jobs:
       - name: Zip binaries
         run: |
           cd build/bin
-          zip case_01_v1.zip build/bin/case_01_v1
+          zip case_01_v1.zip case_01_v1
       - name: LOCI Upload
         uses: ./upload-action
         env:
