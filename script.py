@@ -1,5 +1,6 @@
 import requests
 import numpy as np
+import yaml
 
 def main():
     print("Running my Python script with dependencies! Some modification.")
