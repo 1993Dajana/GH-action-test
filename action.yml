@@ -35,5 +35,5 @@ runs:
       run: pip install dist/loci_api-0.2.2-py2.py3-none-any.whl
       shell: bash
     - name: Upload binary to LOCI
-      run: python -m loci_api upload ${{ inputs.elf }} ${{ inputs.project }} ${{ inputs.version }}
+      run: python -m loci_api upload "${{ inputs.elf }}" "${{ inputs.project }}" "${{ inputs.version }}"
       shell: bash
