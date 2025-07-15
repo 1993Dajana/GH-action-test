@@ -23,6 +23,6 @@ jobs:
                 LOCI_BACKEND_URL: ${{ secrets.LOCI_BACKEND_URL }}
                 LOCI_API_KEY: ${{ secrets.LOCI_API_KEY }}                        
               with:
-                elf: ./case_03_v1
+                binary: ./case_03_v1.zip
                 project: DIFF Tests
                 version: case_03_v1
