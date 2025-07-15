@@ -27,7 +27,7 @@ runs:
         key: '${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}'
         restore-keys: '${{ runner.os }}-pip-'
     - name: Install python dependencies
-      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}'
+      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
       shell: bash
     - name: Upload binary to LOCI
       run: >-
