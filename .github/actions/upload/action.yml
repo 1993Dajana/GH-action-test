@@ -16,20 +16,20 @@ runs:
   steps:
     - name: Prepare inputs
       run: |
-          echo "::group::Collect binaries"
-            while IFS= read -r line; do
-              [[ -n "$line" ]] && files+=("$line")
-            done <<< "${{ inputs.binaries }}"
-          echo "::endgroup::"
+          echo ::group::Collect binaries
+          while IFS= read -r line; do
+            [[ -n "$line" ]] && files+=("$line")
+          done <<< "${{ inputs.binaries }}"
+          echo ::endgroup::
 
-          echo "::group::Archive binaries" 
-            arch_binaries_path="$PWD/binaries.zip"
-            zip "$arch_binaries_path" "${files[@]}"
-            echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
-          echo "::endgroup::"
+          echo ::group::Archive binaries 
+          arch_binaries_path="$PWD/binaries.zip"
+          zip "$arch_binaries_path" "${files[@]}"
+          echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
+          echo ::endgroup::
 
-          file "$arch_binaries_path"
-          ll "$arch_binaries_path"
+          file  "$arch_binaries_path"
+          ls -l "$arch_binaries_path"
       shell: bash
     # - name: Upload new project version to LOCI
     #   run: |
