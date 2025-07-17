@@ -16,6 +16,7 @@ runs:
   steps:
     - name: Prepare inputs
       run: |
+
           echo ::group::Collect binaries
           while IFS= read -r line; do
             [[ -n "$line" ]] && files+=("$line")
@@ -33,6 +34,7 @@ runs:
       shell: bash
     # - name: Upload new project version to LOCI
     #   run: |
+    #
     #     echo "::group::Upload archived binaries as new project version"
     #       loci_api upload           \
     #       "$arch_binaries_path"     \
