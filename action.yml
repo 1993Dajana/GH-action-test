@@ -31,9 +31,9 @@ runs:
         project:   ${{ inputs.project }}
         version:   ${{ inputs.version }}
         binaries:  ${{ inputs.binaries }}
-    # - name: Activate insights mode
-    #   if: ${{ inputs.mode == 'insights' }}
-    #   uses: ./.github/actions/insights
-    #   with:
-    #     project: ${{ inputs.project }}
-    #     version: ${{ inputs.version }}
+    - name: Activate insights mode
+      if: ${{ inputs.mode == 'insights' }}
+      uses: ./.github/actions/insights
+      with:
+        project: ${{ inputs.project }}
+        version: ${{ inputs.version }}

@@ -16,6 +16,7 @@ jobs:
           set +x
           echo "Cross compiler installed"
           echo ::endgroup::
+        shell: stdbuf -oL -eL bash
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Build binaries
@@ -37,6 +38,7 @@ jobs:
           set +x
           echo "Successfully compiled example/case_01 (version 2)"
           echo ::endgroup::
+        shell: stdbuf -oL -eL bash
       - name: Upload binaries (loci)
         uses: ./
         env:

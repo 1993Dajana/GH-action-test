@@ -11,7 +11,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Find function insights
+    - name: Fetch function insights
       run: |
         echo ::group::Get function insights for project's version
         set -x

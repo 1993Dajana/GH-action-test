@@ -38,7 +38,7 @@ runs:
 
           file  "$arch_binaries_path"
           ls -l "$arch_binaries_path"
-      shell: bash
+      shell: stdbuf -oL -eL bash
     # - name: Upload new project version to LOCI
     #   run: |
     #

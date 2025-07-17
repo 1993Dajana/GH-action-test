@@ -19,6 +19,7 @@ runs:
         echo ::group::Install Python dependencies
         echo "Installing Python dependencies"
         set -x
+        python -m pip install --upgrade pip
         pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
         set +x
         echo "Python dependencies installed"
