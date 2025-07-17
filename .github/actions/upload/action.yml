@@ -27,7 +27,7 @@ runs:
           echo "::group::Archive binaries"
           echo "Archiving binaries"
           bash -x -c "arch_binaries_path=\"$PWD\"/binaries.zip"
-          bash -x -c "zip $arch_binaries_path \"${files[@]}\""
+          bash -x -c "zip \"$arch_binaries_path\" \"${files[@]}\""
           echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
           echo "Binaries archived"
           echo "::endgroup::"
