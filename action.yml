@@ -8,8 +8,8 @@ inputs:
     description: Path to requirements.txt
     required: false
     default: requirements.txt
-  binary:
-    description: Path to the ZIP archive containing all binaries to upload
+  binaries:
+    description: Paths to binaries to upload
     required: false
   project:
     description: Name of the existing project for which to retrieve function insights
@@ -28,17 +28,16 @@ runs:
           ~\AppData\Local\pip\Cache
         key: '${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}'
         restore-keys: '${{ runner.os }}-pip-'
-    - name: Install python dependencies
+    - name: Install dependencies
       run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
       shell: bash
     - name: Activate upload mode
       if: ${{ inputs.mode == 'upload' }}
       uses: ./.github/actions/upload
       with:
-        binary:  ${{ inputs.binary }}
-        project: ${{ inputs.project }}
-        version: ${{ inputs.version }}
-
+        project:   ${{ inputs.project }}
+        version:   ${{ inputs.version }}
+        binaries:  ${{ inputs.binaries }}
     - name: Activate insights mode
       if: ${{ inputs.mode == 'insights' }}
       uses: ./.github/actions/insights

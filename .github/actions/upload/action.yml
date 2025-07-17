@@ -2,8 +2,8 @@ name: LOCI Upload
 description: Upload binary to LOCI
 author: AuroraLabs
 inputs:
-  binary:
-    description: Path to the ZIP archive containing all binaries to upload
+  binaries:
+    description: Paths to binaries to upload
     required: true
   project:
     description: Name of an existing project to associate with this upload
@@ -14,10 +14,17 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Prepare binaries
+      run: while IFS= read -r line; do
+              files +=("$line")
+           done <<< "${{ inputs.binaries }}"
+           echo "arch_binaries_path=$(realpath binaries.zip)" >> "$GITHUB_ENV"
+           zip "$arch_binaries_path" "${files[@]}"
+      shell: bash
     - name: Upload binary to LOCI
       run: >-
         loci_api upload
-        "${{ inputs.binary }}"
+        "$arch_binaries_path"
         "${{ inputs.project }}"
         "${{ inputs.version }}"
       shell: bash

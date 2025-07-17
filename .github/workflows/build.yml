@@ -8,20 +8,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install AArch64 toolchain
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-      - name: Build example case_01 app (v1)
+      - name: Build examples
         run: >
           mkdir -p build/bin
 
-          aarch64-linux-gnu-g++ -o build/bin/case_01_v1
+          aarch64-linux-gnu-g++ -o "build/bin/case_01 v1"
           examples/case_01/test_01.cpp
-      - name: Zip binaries
-        run: |
-          cd build/bin
-          zip case_01_v1.zip case_01_v1
+
+          aarch64-linux-gnu-g++ -o "build/bin/case_01 v2"
+          examples/case_01/test_02.cpp
       - name: LOCI Upload
         uses: ./
         env:
@@ -29,7 +28,9 @@ jobs:
           LOCI_API_KEY: '${{ secrets.LOCI_API_KEY }}'
         with:
           mode: upload
-          binary: ./build/bin/case_01_v1.zip
+          binaries: |
+                ./build/bin/case_01 v1
+                ./build/bin/case_01 v2
           project: DIFF Tests
           version: case_03_v1
       
