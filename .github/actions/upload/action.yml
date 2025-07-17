@@ -19,8 +19,9 @@ runs:
           while IFS= read -r line; do
             [[ -n "$line" ]] && files+=("$line")
           done <<< "${{ inputs.binaries }}"
-          echo "arch_binaries_path=$PWD/binaries.zip" >> "$GITHUB_ENV"
+          arch_binaries_path="$PWD/binaries.zip"
           zip "$arch_binaries_path" "${files[@]}"
+          echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
       shell: bash
     - name: Upload binary to LOCI
       run: >-
