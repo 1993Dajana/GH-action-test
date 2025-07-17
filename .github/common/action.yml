@@ -1,0 +1,19 @@
+name: LOCI Upload
+description: Action that runs common steps
+author: AuroraLabs
+inputs:
+  requirements-file:
+    description: Path to requirements.txt
+    required: false
+    default: requirements.txt
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5.6.0
+      with:
+        python-version: '3.12'
+        cache: 'pip' 
+    - name: Install Python dependencies
+      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
+      shell: bash
