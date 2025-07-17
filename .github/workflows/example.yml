@@ -10,35 +10,31 @@ jobs:
         run: |
           echo ::group::Install AArch64 cross-compiler
           echo "Installing aarch64 compiler packages"
-          set -x
-          sudo apt-get update
-          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-          set +x
+          bash -x -c "sudo apt-get update"
+          bash -x -c "sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu"
           echo "Cross compiler installed"
           echo ::endgroup::
-        shell: stdbuf -oL -eL bash
+        shell: bash
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Build binaries
         run: |
           echo ::group::Compile example version 1
           echo "Compiling example/case_01 (version 1)"
-          set -x
-          mkdir -p build/bin
-          aarch64-linux-gnu-g++ -o "build/bin/case_01 v1" \
-          examples/case_01/test_01.cpp
-          set +x
+          bash -x -c "mkdir -p build/bin"
+          bash -x -c "aarch64-linux-gnu-g++        \
+                      -o \"build/bin/case_01 v1\"  \
+                      examples/case_01/test_01.cpp"
           echo "Successfully compiled example/case_01 (version 1)"
           echo ::endgroup::
           echo ::group::Compile example version 2
           echo "Compiling example/case_01 (version 2)"
-          set -x
-          aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
-          examples/case_01/test_02.cpp
-          set +x
+          bash -x -c "aarch64-linux-gnu-g++        \
+                      -o \"build/bin/case_01 v2\"  \
+                      examples/case_01/test_02.cpp"
           echo "Successfully compiled example/case_01 (version 2)"
           echo ::endgroup::
-        shell: stdbuf -oL -eL bash
+        shell: bash
       - name: Upload binaries (loci)
         uses: ./
         env:

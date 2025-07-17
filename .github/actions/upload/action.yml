@@ -18,21 +18,17 @@ runs:
       run: |
           echo "::group::Collect binaries"
           echo "Collecting binaries"
-          set -x
-          while IFS= read -r line; do
-            [[ -n "$line" ]] && files+=("$line")
-          done <<< "${{ inputs.binaries }}"
-          set +x
+          bash -x -c "while IFS= read -r line; do
+                      [[ -n \"$line\" ]] && files+=(\"$line\")
+                    done <<< \"${{ inputs.binaries }}\""
           echo "Binaries collected"
           echo "::endgroup::"
 
           echo "::group::Archive binaries"
           echo "Archiving binaries"
-          set -x
-          arch_binaries_path="$PWD/binaries.zip"
-          zip "$arch_binaries_path" "${files[@]}"
+          bash -x -c "arch_binaries_path=\"$PWD\"/binaries.zip"
+          bash -x -c "zip $arch_binaries_path \"${files[@]}\""
           echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
-          set +x
           echo "Binaries archived"
           echo "::endgroup::"
 
