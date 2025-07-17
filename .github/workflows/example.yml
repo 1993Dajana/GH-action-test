@@ -16,8 +16,8 @@ jobs:
           set +x
           echo "Cross compiler installed"
           echo ::endgroup::
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Build binaries
         run: |
           echo ::group::Compile example version 1
