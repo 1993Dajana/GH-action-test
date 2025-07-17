@@ -15,11 +15,12 @@ runs:
   using: composite
   steps:
     - name: Prepare binaries
-      run: while IFS= read -r line; do
-              files +=("$line")
-           done <<< "${{ inputs.binaries }}"
-           echo "arch_binaries_path=$(realpath binaries.zip)" >> "$GITHUB_ENV"
-           zip "$arch_binaries_path" "${files[@]}"
+      run: |
+          while IFS= read -r line; do
+            files+=("$line")
+          done <<< "${{ inputs.binaries }}"
+          echo "arch_binaries_path=$(realpath binaries.zip)" >> "$GITHUB_ENV"
+          zip "$arch_binaries_path" "${files[@]}"
       shell: bash
     - name: Upload binary to LOCI
       run: >-
