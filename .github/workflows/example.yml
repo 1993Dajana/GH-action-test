@@ -19,7 +19,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Build binaries
         run: |
-
           echo ::group::Compile example version 1
           echo "Compiling example/case_01 (version 1)"
           mkdir -p build/bin
@@ -27,7 +26,6 @@ jobs:
           examples/case_01/test_01.cpp
           echo "Compiled example/case_01 (version 1)"
           echo ::endgroup::
-
           echo ::group::Compile example version 2
           echo "Compiling example/case_01 (version 2)"
           aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
