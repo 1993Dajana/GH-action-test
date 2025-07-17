@@ -34,13 +34,13 @@ runs:
           ~\AppData\Local\pip\Cache
         key: '${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}'
         restore-keys: '${{ runner.os }}-pip-'
-    # - name: Activate upload mode
-    #   if: ${{ inputs.mode == 'upload' }}
-    #   uses: ./.github/actions/upload
-    #   with:
-    #     project:   ${{ inputs.project }}
-    #     version:   ${{ inputs.version }}
-    #     binaries:  ${{ inputs.binaries }}
+    - name: Activate upload mode
+      if: ${{ inputs.mode == 'upload' }}
+      uses: ./.github/actions/upload
+      with:
+        project:   ${{ inputs.project }}
+        version:   ${{ inputs.version }}
+        binaries:  ${{ inputs.binaries }}
     # - name: Activate insights mode
     #   if: ${{ inputs.mode == 'insights' }}
     #   uses: ./.github/actions/insights
