@@ -19,18 +19,18 @@ jobs:
       - name: Build binaries
         run: |
           echo ::group::Compile version 1
-          echo Compiling example/case_01 (version 1)
+          echo "Compiling example/case_01 (version 1)"
           mkdir -p build/bin
           aarch64-linux-gnu-g++ -o "build/bin/case_01 v1" \
           examples/case_01/test_01.cpp
-          echo Compiled example/case_01 (version 1)
+          echo "Compiled example/case_01 (version 1)"
           echo ::endgroup::
 
           echo ::group::Compile example ver_02
-          echo Compiling example/case_01 (version 2)
+          echo "Compiling example/case_01 (version 2)"
           aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
           examples/case_01/test_02.cpp
-          echo Compiled example/case_01 (version 1)
+          echo "Compiled example/case_01 (version 2)"
           echo ::endgroup::
       - name: Run LOCI Upload
         uses: ./
