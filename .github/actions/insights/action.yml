@@ -1,5 +1,5 @@
 name: LOCI Function Insights
-description: Find function insights of project version
+description: Action that generates function insights of given project
 author: AuroraLabs
 inputs:
   project:

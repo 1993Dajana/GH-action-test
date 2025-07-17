@@ -1,5 +1,5 @@
 name: LOCI Upload
-description: Upload new version of binaries to LOCI
+description: Action that uploads new project version to LOCI
 author: AuroraLabs
 inputs:
   binaries:
