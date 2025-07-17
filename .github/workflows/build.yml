@@ -1,9 +1,9 @@
 name: Example action
 'on':
-  push: null
-  workflow_dispatch: null
+  push:
+  workflow_dispatch:
 jobs:
-  loci-upload:
+  loci:
     runs-on: ubuntu-latest
     steps:
       - name: Prepare environment
