@@ -6,22 +6,27 @@ jobs:
   loci-upload:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Install dependencies
+      - name: Prepare environment
         run: |
+          echo "::group::Install AArch64 cross-compiler"
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-      - name: Build examples
-        run: >
+          echo "::endgroup::"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build binaries
+        run: |
+          echo "::group::Compile example ver_01"
           mkdir -p build/bin
-
-          aarch64-linux-gnu-g++ -o "build/bin/case_01 v1"
+          aarch64-linux-gnu-g++ -o "build/bin/case_01 v1" \
           examples/case_01/test_01.cpp
+          echo "::endgroup::"
 
-          aarch64-linux-gnu-g++ -o "build/bin/case_01 v2"
+          echo "::group::Compile example ver_02"
+          aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
           examples/case_01/test_02.cpp
-      - name: LOCI Upload
+          echo "::endgroup::"
+      - name: Run LOCI Upload
         uses: ./
         env:
           LOCI_BACKEND_URL: '${{ secrets.LOCI_BACKEND_URL }}'
@@ -34,7 +39,7 @@ jobs:
           project: DIFF Tests
           version: case_03_v1
       
-      - name: LOCI Insights
+      - name: Run LOCI Insights
         uses: ./
         env:
           LOCI_BACKEND_URL: '${{ secrets.LOCI_BACKEND_URL }}'

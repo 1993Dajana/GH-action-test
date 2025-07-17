@@ -12,8 +12,10 @@ runs:
   using: composite
   steps:
     - name: Find function insights
-      run: >-
-        loci_api func-insights
-        "${{ inputs.project }}"
+      run: |
+        echo "::group::Get function insights for project's version"
+        loci_api func-insights  \
+        "${{ inputs.project }}" \
         "${{ inputs.version }}"
+        echo "::endgroup::"
       shell: bash
