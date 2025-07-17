@@ -20,16 +20,11 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Use cached dependencies
-      uses: actions/cache@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5.6.0
       with:
-        path: |
-          ~/.cache/pip
-          ~\AppData\Local\pip\Cache
-        key: '${{ runner.os }}-pip-${{ hashFiles(inputs.requirements-file) }}'
-        restore-keys: '${{ runner.os }}-pip-'
-    - name: Run common steps 
-      uses: ./.github/actions/common
+        python-version: '3.12'
+        cache: 'pip' 
     - name: Activate upload mode
       if: ${{ inputs.mode == 'upload' }}
       uses: ./.github/actions/upload

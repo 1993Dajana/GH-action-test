@@ -13,7 +13,6 @@ runs:
   steps:
     - name: Find function insights
       run: |
-
         echo ::group::Get function insights for project's version
         loci_api func-insights  \
         "${{ inputs.project }}" \
