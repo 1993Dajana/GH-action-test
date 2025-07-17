@@ -8,17 +8,18 @@ jobs:
     steps:
       - name: Prepare environment
         run: |
-
+          echo "commands"
           echo ::group::Install AArch64 cross-compiler
           echo "Installing aarch64 compiler packages"
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
           echo "Cross compiler installed"
           echo ::endgroup::
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # - name: Checkout repository
+      #   uses: actions/checkout@v4
       - name: Build binaries
         run: |
+          echo "commands"
           echo ::group::Compile example version 1
           echo "Compiling example/case_01 (version 1)"
           mkdir -p build/bin

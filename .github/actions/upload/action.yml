@@ -16,7 +16,7 @@ runs:
   steps:
     - name: Prepare inputs
       run: |
-
+          echo "commands"
           echo ::group::Collect binaries
           while IFS= read -r line; do
             [[ -n "$line" ]] && files+=("$line")
