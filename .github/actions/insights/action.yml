@@ -13,10 +13,12 @@ runs:
   steps:
     - name: Find function insights
       run: |
-        echo "commands"
         echo ::group::Get function insights for project's version
+        set -x
         loci_api func-insights  \
         "${{ inputs.project }}" \
         "${{ inputs.version }}"
+        set +x
+        echo "Function insights fetched"
         echo ::endgroup::
       shell: bash

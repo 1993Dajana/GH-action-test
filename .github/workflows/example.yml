@@ -8,32 +8,36 @@ jobs:
     steps:
       - name: Prepare environment
         run: |
-          echo "commands"
           echo ::group::Install AArch64 cross-compiler
           echo "Installing aarch64 compiler packages"
+          set -x
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          set +x
           echo "Cross compiler installed"
           echo ::endgroup::
       # - name: Checkout repository
       #   uses: actions/checkout@v4
       - name: Build binaries
         run: |
-          echo "commands"
           echo ::group::Compile example version 1
           echo "Compiling example/case_01 (version 1)"
+          set -x
           mkdir -p build/bin
           aarch64-linux-gnu-g++ -o "build/bin/case_01 v1" \
           examples/case_01/test_01.cpp
-          echo "Compiled example/case_01 (version 1)"
+          set +x
+          echo "Successfully compiled example/case_01 (version 1)"
           echo ::endgroup::
           echo ::group::Compile example version 2
           echo "Compiling example/case_01 (version 2)"
+          set -x
           aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
           examples/case_01/test_02.cpp
-          echo "Compiled example/case_01 (version 2)"
+          set +x
+          echo "Successfully compiled example/case_01 (version 2)"
           echo ::endgroup::
-      - name: Run LOCI Upload
+      - name: Upload binaries (loci)
         uses: ./
         env:
           LOCI_BACKEND_URL: '${{ secrets.LOCI_BACKEND_URL }}'
@@ -46,7 +50,7 @@ jobs:
           project: DIFF Tests
           version: case_03_v1
       
-      - name: Run LOCI Insights
+      - name: Fetch function insights (loci)
         uses: ./
         env:
           LOCI_BACKEND_URL: '${{ secrets.LOCI_BACKEND_URL }}'

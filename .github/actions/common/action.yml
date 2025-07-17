@@ -15,5 +15,12 @@ runs:
         python-version: '3.12'
         cache: 'pip' 
     - name: Install Python dependencies
-      run: pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
+      run: |
+        echo ::group::Install Python dependencies
+        echo "Installing Python dependencies"
+        set -x
+        pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}
+        set +x
+        echo "Python dependencies installed"
+        echo "::endgroup::"
       shell: bash
