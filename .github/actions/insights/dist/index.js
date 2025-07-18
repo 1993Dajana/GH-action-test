@@ -27599,7 +27599,7 @@ async function run() {
           "total_functions": 3,
           "total_lines_of_code": 147
         }
-      };` 
+      }`; 
     core.info("Insights fetched successfully");
     core.endGroup();
 
