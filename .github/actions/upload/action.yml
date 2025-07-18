@@ -14,28 +14,30 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Prepare inputs
+    - name: Collect binaries
       run: |
           echo "::group::Collect binaries"
           echo "Collecting binaries"
-          bash -x -c '                       \
-            files=()                         \
-            while IFS= read -r line; do      \
+          bash -x -c '                              \
+            files=()                                \
+            while IFS= read -r line; do             \
+              [[ -n "$line" ]] && files+=("$line")  \
             done <<< "${{ inputs.binaries }}"
           '
           echo "Binaries collected"
           echo "::endgroup::"
-
+      shell: bash
+    - name: Archive binaries
+      run: |
           echo "::group::Archive binaries"
           echo "Archiving binaries"
           bash -x -c 'arch_binaries_path="$PWD"/binaries.zip'
           bash -x -c 'zip "$arch_binaries_path" "${files[@]}'
           echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
-          echo "Binaries archived"
-          echo "::endgroup::"
-
           file  "$arch_binaries_path"
           ls -l "$arch_binaries_path"
+          echo "Binaries archived"
+          echo "::endgroup::"
       shell: bash
     # - name: Upload new project version to LOCI
     #   run: |
