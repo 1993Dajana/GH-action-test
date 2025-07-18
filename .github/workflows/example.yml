@@ -8,12 +8,9 @@ jobs:
     steps:
       - name: Prepare environment
         run: |
-          echo ::group::Install AArch64 cross-compiler
-          echo "Installing aarch64 compiler packages"
-          bash -x -c "sudo apt-get update"
-          bash -x -c "sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu"
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
           echo "Cross compiler installed"
-          echo ::endgroup::
         shell: bash
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,9 +23,9 @@ jobs:
         shell: bash
       - name: Compile example version 2
         run: |
-            aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
-            examples/case_01/test_02.cpp
-            echo "Successfully compiled example/case_01 (version 2)"
+          aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
+          examples/case_01/test_02.cpp
+          echo "Successfully compiled example/case_01 (version 2)"
         shell: bash
       - name: Upload binaries (loci)
         uses: ./

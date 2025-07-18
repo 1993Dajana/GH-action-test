@@ -8,9 +8,8 @@ async function run() {
 
     core.startGroup(`Fetch function insights for ${project} ${version}`);
     // await exec.exec("loci_api", ["func-insights", project, version]);
-    core.endGroup();
-
     core.info("Insights fetched successfully");
+    core.endGroup();
   } catch (err) {
     core.setFailed(`Insights fetch failed: ${err.message}`);
   }

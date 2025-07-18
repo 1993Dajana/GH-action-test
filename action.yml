@@ -20,6 +20,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Setup Python with caching
+      uses: actions/setup-python@v5.6.0
+      with:
+        python-version: '3.12'
+        cache: 'pip'
     - name: Install dependencies
       uses: ./.github/actions/common
       with:
