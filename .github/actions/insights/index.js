@@ -25,6 +25,8 @@ async function run() {
     core.startGroup('Fetched Function Insights');
     core.info(JSON.stringify(jInsights, null, 2));
     core.endGroup();
+
+    core.endGroup();
   } catch (err) {
     core.setFailed(`Insights fetch failed: ${err.message}`);
   }
