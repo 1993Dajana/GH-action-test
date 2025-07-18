@@ -39,7 +39,7 @@ jobs:
                 ./build/bin/case_01 v1
                 ./build/bin/case_01 v2
           project: DIFF Tests
-          version: case_02_v1
+          version: case_03_v1
       
       - name: Fetch function insights (loci)
         uses: ./
@@ -49,4 +49,4 @@ jobs:
         with:
           mode: insights
           project: DIFF Tests
-          version: case_03_v1
+          version: case_02_v1
