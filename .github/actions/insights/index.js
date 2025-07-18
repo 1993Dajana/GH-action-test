@@ -6,7 +6,7 @@ async function run() {
     const project = core.getInput("project", { required: true });
     const version = core.getInput("version", { required: true });
 
-    core.startGroup(`Fetch function insights ${project}(${version})`);
+    core.startGroup(`Fetch function insights for ${project}(${version})`)
     // let insights = "";
     // const options = {};
     // options.listeners = {
@@ -21,11 +21,11 @@ async function run() {
         mode: 'upload'
     };      
     core.info("Insights fetched successfully");
+    core.endGroup();
+
     const jInsights = JSON.parse(insights);
     core.startGroup('Fetched Function Insights');
     core.info(JSON.stringify(jInsights, null, 2));
-    core.endGroup();
-
     core.endGroup();
   } catch (err) {
     core.setFailed(`Insights fetch failed: ${err.message}`);
