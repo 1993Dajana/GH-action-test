@@ -14,9 +14,10 @@ runs:
     - name: Fetch function insights
       run: |
         echo ::group::Get function insights for project's version
-        bash -x -c "loci_api func-insights  \
-                    ${{ inputs.project }}   \
-                    ${{ inputs.version }}"
+
         echo "Function insights fetched"
         echo ::endgroup::
       shell: bash
+              # bash -x -c "loci_api func-insights  \
+              #       ${{ inputs.project }}   \
+              #       ${{ inputs.version }}"
