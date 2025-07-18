@@ -1,5 +1,5 @@
-name: LOCI Upload
-description: Action that runs common steps
+name: LOCI Common
+description: Setup Python and install dependencies
 author: AuroraLabs
 inputs:
   requirements-file:
@@ -7,19 +7,5 @@ inputs:
     required: false
     default: requirements.txt
 runs:
-  using: composite
-  steps:
-    - name: Setup Python
-      uses: actions/setup-python@v5.6.0
-      with:
-        python-version: '3.12'
-        cache: 'pip' 
-    - name: Install Python dependencies
-      run: |
-        echo ::group::Install Python dependencies
-        echo "Installing Python dependencies"
-        bash -x -c "python -m pip install --upgrade pip"
-        bash -x -c "pip install --cache-dir ~/.cache/pip -r ${{ inputs.requirements-file }}"
-        echo "Python dependencies installed"
-        echo "::endgroup::"
-      shell: bash
+  using: node20
+  main: dist/index.js
