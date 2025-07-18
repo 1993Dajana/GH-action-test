@@ -25,7 +25,7 @@ async function run() {
     core.endGroup();
 
     core.startGroup("Upload new project version to loci");
-    await exec.exec("loci_api", ["upload", binsArchive, iProject, iVersion]);
+    await exec.exec("loci_api", ["upload", `"${binsArchive}"`, `"${iProject}"`, `"${iVersion}"`]);
     core.info("Project version uploaded");
     core.endGroup();
   } catch (err) {
