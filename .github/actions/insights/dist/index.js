@@ -27560,28 +27560,21 @@ const exec = __nccwpck_require__(5057);
 
 async function run() {
   try {
-    const requirementsFile = core.getInput("requirements-file", { required: false }) || "requirements.txt";
+    const project = core.getInput("project", { required: true });
+    const version = core.getInput("version", { required: true });
 
-    core.startGroup("Setup python environment");
-    await exec.exec("python", ["--version"]);
+    core.startGroup(`Fetch function insights for ${project} ${version}`);
+    // await exec.exec("loci_api", ["func-insights", project, version]);
     core.endGroup();
 
-    core.startGroup("Upgrade pip");
-    await exec.exec("python", ["-m", "pip", "install", "--upgrade", "pip"]);
-    core.endGroup();
-
-    core.startGroup("Install python dependencies");
-    await exec.exec("pip", ["install", "--cache-dir", `${process.env.HOME}/.cache/pip`, "-r", requirementsFile]);
-    core.info("Python dependencies installed");
-    core.endGroup();
-
-    core.info("Python environment ready");
+    core.info("Insights fetched successfully");
   } catch (err) {
-    core.setFailed(`Failed in common action: ${err.message}`);
+    core.setFailed(`Insights fetch failed: ${err.message}`);
   }
 }
 
 run();
+
 module.exports = __webpack_exports__;
 /******/ })()
 ;

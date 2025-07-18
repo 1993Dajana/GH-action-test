@@ -1,23 +1,13 @@
-name: LOCI Function Insights
-description: Action that generates function insights of given project
+name: LOCI Insights
+description: Fetch LOCI function insights
 author: AuroraLabs
 inputs:
   project:
-    description: Name of the existing project for which to retrieve function insights
+    description: Name of the project to retrieve insights for
     required: true
   version:
-    description: Version of the project for which to retrieve function insights
+    description: Version of the project to retrieve insights for
     required: true
 runs:
-  using: composite
-  steps:
-    - name: Fetch function insights
-      run: |
-        echo ::group::Get function insights for project's version
-
-        echo "Function insights fetched"
-        echo ::endgroup::
-      shell: bash
-              # bash -x -c "loci_api func-insights  \
-              #       ${{ inputs.project }}   \
-              #       ${{ inputs.version }}"
+  using: node20
+  main: dist/index.js

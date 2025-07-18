@@ -27557,31 +27557,41 @@ module.exports = parseParams
 var __webpack_exports__ = {};
 const core = __nccwpck_require__(217);
 const exec = __nccwpck_require__(5057);
+const path = __nccwpck_require__(6928);
 
 async function run() {
   try {
-    const requirementsFile = core.getInput("requirements-file", { required: false }) || "requirements.txt";
+    const iProject  = core.getInput("project", { required: true });
+    const iVersion  = core.getInput("version", { required: true });
+    const iBinaries = core.getInput("binaries", { required: true });
 
-    core.startGroup("Setup python environment");
-    await exec.exec("python", ["--version"]);
+    const binaries = iBinaries
+      .split("\n")
+      .map((x) => x.trim())
+      .filter(Boolean);
+
+    core.startGroup("Collect binaries");
+    binaries.forEach((file) => core.info(`- ${file}`));
     core.endGroup();
 
-    core.startGroup("Upgrade pip");
-    await exec.exec("python", ["-m", "pip", "install", "--upgrade", "pip"]);
+    core.startGroup("Archive binaries");
+    const binsArchive = path.join(process.cwd(), "binaries.zip");
+    await exec.exec("zip", ["-r", binsArchive, ...binaries]);
+    await exec.exec("ls", ["-lh", binsArchive]);
+    core.info("Binaries archived");
     core.endGroup();
 
-    core.startGroup("Install python dependencies");
-    await exec.exec("pip", ["install", "--cache-dir", `${process.env.HOME}/.cache/pip`, "-r", requirementsFile]);
-    core.info("Python dependencies installed");
+    core.startGroup("Upload new project version to loci");
+    // await exec.exec("loci_api", ["upload", binsArchive, iProject, iVersion]);
+    core.info("Project version uploaded");
     core.endGroup();
-
-    core.info("Python environment ready");
   } catch (err) {
-    core.setFailed(`Failed in common action: ${err.message}`);
+    core.setFailed(`Upload failed: ${err.message}`);
   }
 }
 
 run();
+
 module.exports = __webpack_exports__;
 /******/ })()
 ;

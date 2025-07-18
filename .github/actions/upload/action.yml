@@ -3,44 +3,14 @@ description: Action that uploads new project version to LOCI
 author: AuroraLabs
 inputs:
   binaries:
-    description: Paths to binaries to upload
+    description: Paths to binaries (newline-separated)
     required: true
   project:
-    description: Name of an existing project to associate with this upload
+    description: Name of the project to upload binaries for
     required: true
   version:
     description: Version identifier for this upload
     required: true
 runs:
-  using: composite
-  steps:
-    - name: Collect binaries
-      run: |
-          echo "::group::Collect binaries"
-          echo "Collecting binaries"
-          bash -x -c 'files=(); while IFS= read -r line; do [[ -n "$line" ]] && files+=("$line"); done <<< "${{ inputs.binaries }}"'
-          echo "Binaries collected"
-          echo "::endgroup::"
-      shell: bash
-    - name: Archive binaries
-      run: |
-          echo "::group::Archive binaries"
-          echo "Archiving binaries"
-          bash -x -c 'arch_binaries_path="$PWD"/binaries.zip'
-          bash -x -c 'zip "$arch_binaries_path" "${files[@]}'
-          echo "arch_binaries_path=$arch_binaries_path" >> "$GITHUB_ENV"
-          file  "$arch_binaries_path"
-          ls -l "$arch_binaries_path"
-          echo "Binaries archived"
-          echo "::endgroup::"
-      shell: bash
-    # - name: Upload new project version to LOCI
-    #   run: |
-    #
-    #     echo "::group::Upload archived binaries as new project version"
-    #       loci_api upload           \
-    #       "$arch_binaries_path"     \
-    #       "${{ inputs.project }}"   \
-    #       "${{ inputs.version }}"
-    #     echo "::endgroup::"
-    #   shell: bash
+  using: node20
+  main: dist/index.js

@@ -17,23 +17,18 @@ jobs:
         shell: bash
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Build binaries
+      - name: Compile example version 1
         run: |
-          echo ::group::Compile example version 1
-          echo "Compiling example/case_01 (version 1)"
-          bash -x -c "mkdir -p build/bin"
-          bash -x -c 'aarch64-linux-gnu-g++        \
-                      -o "build/bin/case_01 v1"    \
-                      examples/case_01/test_01.cpp'
+          mkdir -p build/bin
+          aarch64-linux-gnu-g++ -o "build/bin/case_01 v1" \
+          examples/case_01/test_01.cpp
           echo "Successfully compiled example/case_01 (version 1)"
-          echo ::endgroup::
-          echo ::group::Compile example version 2
-          echo "Compiling example/case_01 (version 2)"
-          bash -x -c 'aarch64-linux-gnu-g++        \
-                      -o "build/bin/case_01 v2"    \
-                      examples/case_01/test_02.cpp'
-          echo "Successfully compiled example/case_01 (version 2)"
-          echo ::endgroup::
+        shell: bash
+      - name: Compile example version 2
+        run: |
+            aarch64-linux-gnu-g++ -o "build/bin/case_01 v2" \
+            examples/case_01/test_02.cpp
+            echo "Successfully compiled example/case_01 (version 2)"
         shell: bash
       - name: Upload binaries (loci)
         uses: ./
