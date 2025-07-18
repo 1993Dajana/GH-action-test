@@ -18,12 +18,7 @@ runs:
       run: |
           echo "::group::Collect binaries"
           echo "Collecting binaries"
-          bash -x -c '                               \
-            files=()                                 \
-            while IFS= read -r line; do;             \
-              [[ -n "$line" ]] && files+=("$line");  \
-            done <<< "${{ inputs.binaries }}"
-          '
+          bash -x -c 'files=(); while IFS= read -r line; do [[ -n "$line" ]] && files+=("$line"); done <<< "${{ inputs.binaries }}"'
           echo "Binaries collected"
           echo "::endgroup::"
       shell: bash

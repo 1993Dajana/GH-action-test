@@ -22,16 +22,16 @@ jobs:
           echo ::group::Compile example version 1
           echo "Compiling example/case_01 (version 1)"
           bash -x -c "mkdir -p build/bin"
-          bash -x -c "aarch64-linux-gnu-g++        \
-                      -o \"build/bin/case_01 v1\"  \
-                      examples/case_01/test_01.cpp"
+          bash -x -c 'aarch64-linux-gnu-g++        \
+                      -o "build/bin/case_01 v1"    \
+                      examples/case_01/test_01.cpp'
           echo "Successfully compiled example/case_01 (version 1)"
           echo ::endgroup::
           echo ::group::Compile example version 2
           echo "Compiling example/case_01 (version 2)"
-          bash -x -c "aarch64-linux-gnu-g++        \
-                      -o \"build/bin/case_01 v2\"  \
-                      examples/case_01/test_02.cpp"
+          bash -x -c 'aarch64-linux-gnu-g++        \
+                      -o "build/bin/case_01 v2"    \
+                      examples/case_01/test_02.cpp'
           echo "Successfully compiled example/case_01 (version 2)"
           echo ::endgroup::
         shell: bash
