@@ -27574,11 +27574,6 @@ async function run() {
     await exec.exec("loci_api", ["func-insights", project, version], options);
     core.info("Insights fetched successfully");
     core.endGroup();
-
-    const jInsights = JSON.parse(insights);
-    core.startGroup('Fetched Function Insights');
-    core.info(JSON.stringify(jInsights, null, 2));
-    core.endGroup();
   } catch (err) {
     core.setFailed(`Insights fetch failed: ${err.message}`);
   }

@@ -27575,8 +27575,8 @@ async function run() {
     core.endGroup();
 
     core.startGroup("Archive binaries");
-    const binsArchive = path.join(process.cwd(), "binaries.zip");
-    await exec.exec("zip", ["-r", binsArchive, ...binaries]);
+    const binsArchive = path.join(process.cwd(), "binaries.tar.xz");
+    await exec.exec("tar", ["-cf", binsArchive, ...binaries]);
     await exec.exec("ls", ["-lh", binsArchive]);
     core.info("Binaries archived");
     core.endGroup();
