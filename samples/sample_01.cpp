@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <unordered_set>
 #include <random>
 #include <chrono>
 
@@ -15,16 +15,11 @@ std::vector<int> generate_ids(size_t N, unsigned seed) {
 }
 
 size_t count_unique(const std::vector<int>& ids) {
-    std::vector<int> seen;
-    seen.reserve(ids.size());
-    size_t counter = 0;
+    std::unordered_set<int> seen;  // Use unordered_set to track unique IDs
     for (int id : ids) {
-        if (std::find(seen.begin(), seen.end(), id) == seen.end()) {
-            seen.push_back(id);
-            ++counter;
-        }
+        seen.insert(id);  // Insertion will ignore duplicates
     }
-    return counter;
+    return seen.size();  // The number of unique IDs is the size of the set
 }
 
 void run_test(size_t N, unsigned seed) {
