@@ -34,6 +34,10 @@ void run_test(size_t N, unsigned seed) {
               << "  (elapsed " 
               << std::chrono::duration<double, std::milli>(t1 - t0).count()
               << " ms)\n";
+    for (int i = 0; i < 10 && i < ids.size(); ++i) {
+        std::cout << ids[i] << " ";
+    }
+    std::cout << "\n";
 }
 
 int main() {
