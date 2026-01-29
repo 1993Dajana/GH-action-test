@@ -28,7 +28,24 @@ void run_test(size_t N, unsigned seed) {
     std::cout << "Unique: " << unique << "\n";
 }
 
+void greet() {
+    std::cout << "Hello from greet function!\n";
+    
+    // Do some actual work to prevent optimization
+    const size_t iterations = 1000000;
+    volatile double result = 0.0;
+    
+    for (size_t i = 1; i <= iterations; ++i) {
+        result += 1.0 / static_cast<double>(i);
+        result *= 1.0000001;
+        result -= 0.0000001 * i;
+    }
+    
+    std::cout << "Computation result: " << result << "\n";
+}
+
 int main() {
+    greet();
     run_test(200'000, 42);
     return 0;
 }
