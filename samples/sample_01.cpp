@@ -3,6 +3,7 @@
 #include <unordered_set>
 #include <random>
 #include <chrono>
+#include "utils.h"
 
 std::vector<int> generate_ids(size_t N, unsigned seed) {
   std::mt19937 rng(seed);
@@ -46,6 +47,7 @@ void greet() {
 
 int main() {
     greet();
+    compute_primes(50000);
     run_test(200'000, 42);
     return 0;
 }
