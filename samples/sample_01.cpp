@@ -111,3 +111,7 @@ int main() {
     test_feature_2();
     return 0;
 }
+
+void unused_function() {
+    std::cout << "This function is not used anywhere.\n";
+}
