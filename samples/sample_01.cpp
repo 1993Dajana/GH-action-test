@@ -3,6 +3,7 @@
 #include <unordered_set>
 #include <random>
 #include <chrono>
+#include <string>
 
 std::vector<int> generate_ids(size_t N, unsigned seed) {
   std::mt19937 rng(seed);
@@ -26,6 +27,48 @@ void run_test(size_t N, unsigned seed) {
     auto ids = generate_ids(N, seed);
     size_t unique = count_unique(ids);
     std::cout << "Unique: " << unique << "\n";
+}
+
+// Unused utility functions
+
+long long factorial(int n) {
+    if (n <= 1) return 1;
+    long long result = 1;
+    for (int i = 2; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+int fibonacci(int n) {
+    if (n <= 1) return n;
+    int a = 0, b = 1;
+    for (int i = 2; i <= n; ++i) {
+        int temp = a + b;
+        a = b;
+        b = temp;
+    }
+    return b;
+}
+
+double compute_average(const std::vector<int>& values) {
+    if (values.empty()) return 0.0;
+    long long sum = 0;
+    for (int v : values) {
+        sum += v;
+    }
+    return static_cast<double>(sum) / values.size();
+}
+
+bool is_palindrome(const std::string& str) {
+    size_t left = 0;
+    size_t right = str.size() - 1;
+    while (left < right) {
+        if (str[left] != str[right]) return false;
+        ++left;
+        --right;
+    }
+    return true;
 }
 
 int main() {
