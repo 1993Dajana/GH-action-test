@@ -88,9 +88,14 @@ void greet() {
     std::cout << "Computation result: " << result << "\n";
 }
 
+void test_feature_2() {
+    std::cout << "Testing feature-2 branch PR\n";
+}
+
 int main() {
     greet();
     compute_primes(50000);
     run_test(200'000, 42);
+    test_feature_2();
     return 0;
 }
