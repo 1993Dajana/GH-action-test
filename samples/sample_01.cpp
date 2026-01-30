@@ -70,6 +70,8 @@ bool is_palindrome(const std::string& str) {
         --right;
     }
     return true;
+}
+
 void greet() {
     std::cout << "Hello from greet function!\n";
     
