@@ -90,6 +90,8 @@ void greet() {
 
 void test_feature_2() {
     std::cout << "Testing feature-2 branch PR\n";
+}
+
 void bubble_sort(std::vector<int>& arr) {
     size_t n = arr.size();
     for (size_t i = 0; i < n - 1; ++i) {
