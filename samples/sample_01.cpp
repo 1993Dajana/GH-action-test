@@ -83,11 +83,23 @@ bool is_palindrome(const std::string& str) {
     return true;
 }
 
+int sum_of_digits(int num) {
+    int sum = 0;
+    num = (num < 0) ? -num : num;  // Handle negative numbers
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+    std::cout << "Sum of digits: " << sum << "\n";
+    return sum;
+}
+
 int main() {
     greet();
     calculate_factorial(10);
     is_palindrome("racecar");
     is_palindrome("hello");
+    sum_of_digits(12345);
     compute_primes(50000);
     run_test(200'000, 42);
     return 0;
