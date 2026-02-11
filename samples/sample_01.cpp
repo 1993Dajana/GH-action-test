@@ -108,12 +108,25 @@ int fibonacci(int n) {
     return curr;
 }
 
+int gcd(int a, int b) {
+    a = (a < 0) ? -a : a;
+    b = (b < 0) ? -b : b;
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    std::cout << "GCD = " << a << "\n";
+    return a;
+}
+
 int main() {
     greet();
     calculate_factorial(10);
     is_palindrome("racecar");
     is_palindrome("hello");
     fibonacci(20);
+    gcd(48, 18);
     compute_primes(50000);
     run_test(200'000, 42);
     return 0;
