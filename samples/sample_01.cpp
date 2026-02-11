@@ -94,12 +94,26 @@ int sum_of_digits(int num) {
     return sum;
 }
 
+int fibonacci(int n) {
+    if (n <= 0) return 0;
+    if (n == 1) return 1;
+    
+    int prev = 0, curr = 1;
+    for (int i = 2; i <= n; ++i) {
+        int next = prev + curr;
+        prev = curr;
+        curr = next;
+    }
+    std::cout << "Fibonacci(" << n << ") = " << curr << "\n";
+    return curr;
+}
+
 int main() {
     greet();
     calculate_factorial(10);
     is_palindrome("racecar");
     is_palindrome("hello");
-    sum_of_digits(12345);
+    fibonacci(20);
     compute_primes(50000);
     run_test(200'000, 42);
     return 0;
