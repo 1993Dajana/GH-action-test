@@ -94,12 +94,27 @@ int sum_of_digits(int num) {
     return sum;
 }
 
+double power(double base, int exponent) {
+    double result = 1.0;
+    bool negative = exponent < 0;
+    exponent = negative ? -exponent : exponent;
+    
+    for (int i = 0; i < exponent; ++i) {
+        result *= base;
+    }
+    
+    if (negative) result = 1.0 / result;
+    std::cout << base << "^" << (negative ? -exponent : exponent) << " = " << result << "\n";
+    return result;
+}
+
 int main() {
     greet();
     calculate_factorial(10);
     is_palindrome("racecar");
     is_palindrome("hello");
     sum_of_digits(12345);
+    power(2.0, 10);
     compute_primes(50000);
     run_test(200'000, 42);
     return 0;
