@@ -3,6 +3,7 @@
 #include <unordered_set>
 #include <random>
 #include <chrono>
+#include <string>
 #include "utils.h"
 
 std::vector<int> generate_ids(size_t N, unsigned seed) {
@@ -67,9 +68,26 @@ int calculate_factorial(int n) {
     return result;
 }
 
+bool is_palindrome(const std::string& str) {
+    size_t left = 0;
+    size_t right = str.length() - 1;
+    while (left < right) {
+        if (str[left] != str[right]) {
+            std::cout << "\"" << str << "\" is NOT a palindrome\n";
+            return false;
+        }
+        ++left;
+        --right;
+    }
+    std::cout << "\"" << str << "\" is a palindrome\n";
+    return true;
+}
+
 int main() {
     greet();
     calculate_factorial(10);
+    is_palindrome("racecar");
+    is_palindrome("hello");
     compute_primes(50000);
     run_test(200'000, 42);
     return 0;
