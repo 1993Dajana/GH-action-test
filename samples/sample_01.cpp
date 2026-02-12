@@ -108,6 +108,10 @@ int fibonacci(int n) {
     return curr;
 }
 
+void greeting() {
+    std::cout << "greeting\n";
+}
+
 int main() {
     greet();
     calculate_factorial(10);
@@ -116,5 +120,6 @@ int main() {
     fibonacci(20);
     compute_primes(50000);
     run_test(200'000, 42);
+    greeting();
     return 0;
 }
