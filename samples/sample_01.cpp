@@ -118,6 +118,8 @@ int gcd(int a, int b) {
     }
     std::cout << "GCD = " << a << "\n";
     return a;
+void greeting() {
+    std::cout << "greeting\n";
 }
 
 int main() {
@@ -129,5 +131,6 @@ int main() {
     gcd(48, 18);
     compute_primes(50000);
     run_test(200'000, 42);
+    greeting();
     return 0;
 }
