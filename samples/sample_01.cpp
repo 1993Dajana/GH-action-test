@@ -118,6 +118,8 @@ int gcd(int a, int b) {
     }
     std::cout << "GCD = " << a << "\n";
     return a;
+}
+
 void greeting() {
     std::cout << "greeting\n";
 }
