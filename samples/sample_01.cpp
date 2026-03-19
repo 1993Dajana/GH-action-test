@@ -121,7 +121,7 @@ int gcd(int a, int b) {
 }
 
 void greeting() {
-    std::cout << "greeting\n";
+    std::cout << "greeting lalalala\n";
 }
 
 int main() {
